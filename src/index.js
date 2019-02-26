@@ -3,6 +3,9 @@ const { ApolloServer, gql } = require("apollo-server-express");
 
 const Company = require("./models/company");
 
+const companyResolver = require('./graphql/resolvers/company');
+const jobResolver = require('./graphql/resolvers/job');
+
 // Construct a schema, using GraphQL schema language
 const typeDefs = gql`
   type Company {
@@ -25,22 +28,8 @@ const typeDefs = gql`
 
 // Provide resolver functions for your schema fields
 const resolvers = {
-  Query: {
-    company: async id => {
-      const company = await Company.findById(id);
-      return company;
-    },
-    companys: async () => {
-      const companys = await Company.find();
-      return companys;
-    }
-  },
-  Mutation: {
-    createCompany: async (_, data) => {
-      const company = await Company.create(data);
-      return company;
-    }
-  }
+  Query: Object.assign({}, companyResolver.Query, jobResolver.Query),
+  Mutation: Object.assign({}, companyResolver.Mutation, jobResolver.Mutation)
 };
 
 const server = new ApolloServer({ typeDefs, resolvers });
