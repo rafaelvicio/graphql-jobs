@@ -1,7 +1,7 @@
 const mongoose = require("../database");
 
 const JobSechema = new mongoose.Schema({
-  username: {
+  name: {
     type: String,
     require: true
   },

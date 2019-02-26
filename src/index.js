@@ -1,28 +1,40 @@
 const express = require("express");
 const { ApolloServer, gql } = require("apollo-server-express");
 
-const Company = require("./models/company");
-
 const companyResolver = require('./graphql/resolvers/company');
 const jobResolver = require('./graphql/resolvers/job');
 
 // Construct a schema, using GraphQL schema language
 const typeDefs = gql`
-  type Company {
+type Company {
+  _id: ID
+  name: String
+  address: String
+  url: String
+  description: String
+  active: Boolean
+  createdAt: String
+}
+  type Job {
     _id: ID
     name: String
-    address: String
-    url: String
+    company: Company
     description: String
+    tag: String
+    remote: Boolean
+    salary: String
     active: Boolean
     createdAt: String
   }
   type Query {
-    company(id: ID!): Company
+    company(_id: ID!): Company
     companys: [Company]
+    job(_id: ID!): Job
+    jobs: [Job]
   }
   type Mutation {
     createCompany(name: String!, address: String!, url: String!, description: String!): Company
+    createJob(name: String!, company: String!, description: String!, tag: String, remote: Boolean, salary: String): Job
   }
 `;
 

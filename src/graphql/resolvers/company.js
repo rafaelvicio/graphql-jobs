@@ -1,3 +1,5 @@
+const Company = require("../../models/company");
+
 const companyResolver = {
     Query: {
       company: async id => {

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 mongoose.connect(
-  "mongodb+srv://graphql:graphql@cluster0-hvnry.mongodb.net/test?retryWrites=true",
+  "mongodb://localhost:27017/stattrak",
   { useNewUrlParser: true }
 );
 
