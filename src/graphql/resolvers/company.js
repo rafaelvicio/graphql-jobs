@@ -2,7 +2,8 @@ const Company = require("../../models/company");
 
 const companyResolver = {
     Query: {
-      company: async id => {
+      company: async (_, { id }) => {
+        console.log('--------------> Company: ', id)
         const company = await Company.findById(id);
         return company;
       },

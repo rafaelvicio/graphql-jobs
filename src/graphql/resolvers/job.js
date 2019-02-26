@@ -2,12 +2,12 @@ const Job = require('../../models/job');
 
 const jobResolver = {
     Query: {
-      job: async id => {
-        const job = await Job.findById(id);
+      job: async (_, { id }) => {
+        const job = await Job.findById(id).populate('company');
         return job;
       },
       jobs: async () => {
-        const jobs = await Job.find();
+        const jobs = await Job.find().populate('company');
         return jobs;
       }
     },

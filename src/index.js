@@ -27,9 +27,9 @@ type Company {
     createdAt: String
   }
   type Query {
-    company(_id: ID!): Company
+    company(id: ID!): Company
     companys: [Company]
-    job(_id: ID!): Job
+    job(id: ID!): Job
     jobs: [Job]
   }
   type Mutation {
