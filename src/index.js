@@ -1,6 +1,8 @@
 const express = require("express");
 const { ApolloServer, gql } = require("apollo-server-express");
 
+const cors = require("cors");
+
 const companyResolver = require('./graphql/resolvers/company');
 const jobResolver = require('./graphql/resolvers/job');
 
@@ -34,7 +36,7 @@ type Company {
   }
   type Mutation {
     createCompany(name: String!, address: String!, url: String!, description: String!): Company
-    createJob(name: String!, company: String!, description: String!, tag: String, remote: Boolean, salary: String): Job
+    createJob(name: String!, company: String, description: String, tag: String, remote: Boolean, salary: String): Job
   }
 `;
 
@@ -47,6 +49,7 @@ const resolvers = {
 const server = new ApolloServer({ typeDefs, resolvers });
 
 const app = express();
+app.use(cors());
 server.applyMiddleware({ app });
 
 app.listen({ port: 4000 }, () =>
