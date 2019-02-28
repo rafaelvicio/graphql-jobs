@@ -10,19 +10,16 @@ const JobSechema = new mongoose.Schema({
     ref: "Company"
   },
   description: {
-    type: String,
-    required: true
+    type: String
   },
   tag: {
-    type: String,
-    required: true
+    type: String
   },
   remote: {
     type: Boolean
   },
   salary: {
-    type: String,
-    required: true
+    type: String
   },
   active: {
     type: Boolean,
